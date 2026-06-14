@@ -1,0 +1,23 @@
+# Dependency version catalog for mini-idp.
+#
+# Kept deliberately small (mirrors mini-kms's "read it to learn" ethos):
+#   - Jackson for JSON (token claims, JSON file stores, request/response bodies) and YAML
+#     (parsing the checked-in OpenAPI spec so the same file can be served as JSON).
+#   - Bouncy Castle for the Argon2id KDF used to hash client secrets.
+# Everything else uses the JDK: the HTTP server (com.sun.net.httpserver), Ed25519 signing
+# (KeyPairGenerator/Signature "Ed25519"), SecureRandom, and Base64.
+
+[versions]
+bouncycastle = "1.84"
+jackson = "2.22.0"
+junit-jupiter = "6.1.0"
+
+[libraries]
+# Bouncy Castle provider: the Argon2id KDF (Argon2BytesGenerator) lives here.
+bouncycastle = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+# Jackson: JSON for the wire/claims/stores.
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+# Jackson YAML: lets us keep the OpenAPI spec as a single checked-in openapi.yaml and serve
+# it as JSON too (and lets the contract test parse it).
+jackson-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
