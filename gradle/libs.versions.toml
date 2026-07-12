@@ -8,8 +8,8 @@
 # (KeyPairGenerator/Signature "Ed25519"), SecureRandom, and Base64.
 
 [versions]
-bouncycastle = "1.84"
-jackson = "2.22.0"
+bouncycastle = "1.85"
+jackson = "2.22.1"
 junit-jupiter = "6.1.1"
 
 [libraries]
